@@ -4,9 +4,14 @@
 #include"Users.cpp"
 using namespace std;
 int main() {
+<<<<<<< HEAD
 
   
     User user;
+=======
+  //mm
+    Users user;
+>>>>>>> 5d14e724878c9f01e29beb3d3f9ee5510ed40e75
     int choice;
     int option;
     int your_choice;
@@ -165,3 +170,4 @@ int main() {
     }
     return 0;
 }
+//this is a test
