@@ -1,9 +1,12 @@
 #include<string>
 #include<iostream>
+#include"files.cpp"
+#include"Users.cpp"
 using namespace std;
 int main() {
+
   
-    Users user;
+    User user;
     int choice;
     int option;
     int your_choice;
@@ -31,7 +34,7 @@ int main() {
             {
             case 1:
             {
-                user.SignUp();
+                user.Register();
                 break;
             }
             case 2:
@@ -48,17 +51,17 @@ int main() {
                 {
                 case 1:
                 {
-                    user.DisplayInfo(user_id);
+                    user.DisplayInfo();
                     break;
                 }
                 case 2:
                 {
-                    user.UpdateInfo(user_id);
+                    user.UpdateInfo();
                     break;
                 }
                 case 3:
                 {
-                    user.Delete_user_record(user_id);
+                    user.Delete_user_record();
                     break;
 
                 }

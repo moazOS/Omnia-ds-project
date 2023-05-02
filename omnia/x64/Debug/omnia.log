@@ -1,0 +1,37 @@
+﻿  files.cpp
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(21,29): error C2661: 'Users::Users': no overloaded function takes 4 arguments
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(21,29): message : while trying to match the argument list '(std::string, int, char, bool)'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(31,29): error C2065: 'name': undeclared identifier
+  Source.cpp
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(21,29): error C2661: 'Users::Users': no overloaded function takes 4 arguments
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(21,29): message : while trying to match the argument list '(std::string, int, char, bool)'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(31,29): error C2065: 'name': undeclared identifier
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(10,11): error C2371: 'user': redefinition; different basic types
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(6,11): message : see declaration of 'user'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(23,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(38,22): error C2039: 'SignUp': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(47,39): error C2039: 'Login': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(55,26): error C2039: 'DisplayInfo': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(60,26): error C2039: 'UpdateInfo': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(65,26): error C2039: 'Delete_user_record': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(92,18): error C2039: 'Login_Admin': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(102,22): error C2039: 'DisplayInfo': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(107,22): error C2039: 'DisplayAllUsers': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(114,22): error C2039: 'Delete_user_record': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Source.cpp(119,22): error C2039: 'DeleteAllUsers': is not a member of 'files'
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\files.cpp(2,7): message : see declaration of 'files'
+  Users.cpp
+  Generating Code...
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Users.cpp(35): error C4716: 'Users::Register': must return a value
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Users.cpp(43): error C4716: 'Users::Login': must return a value
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Users.cpp(46): error C4716: 'Users::Password_validation': must return a value
+C:\Users\AGHA SMART STORE\Desktop\neww\Omnia-ds-project\omnia\Users.cpp(49): error C4716: 'Users::ID_validation': must return a value
