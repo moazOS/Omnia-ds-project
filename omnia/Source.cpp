@@ -1,17 +1,10 @@
 #include<string>
 #include<iostream>
-#include"files.cpp"
-#include"Users.cpp"
+#include"Users.h"
+#include"functions.h"
 using namespace std;
 int main() {
-<<<<<<< HEAD
-
-  
-    User user;
-=======
-  //mm
-    Users user;
->>>>>>> 5d14e724878c9f01e29beb3d3f9ee5510ed40e75
+    
     int choice;
     int option;
     int your_choice;
@@ -39,7 +32,9 @@ int main() {
             {
             case 1:
             {
-                user.Register();
+               
+
+
                 break;
             }
             case 2:
@@ -48,7 +43,7 @@ int main() {
                 cin >> id;
                 cout << "Enter your password \n";
                 cin >> password;
-                string user_id = user.Login(id, password);
+                string user_id ;
                 cout << "                    WELCOME USER                 " << endl;
                 cout << "Enter your choice: (1-Display your record 2-Edit your record  3-Delete your record)" << endl;
                 cin >> your_choice;
@@ -56,17 +51,17 @@ int main() {
                 {
                 case 1:
                 {
-                    user.DisplayInfo();
+                    
                     break;
                 }
                 case 2:
                 {
-                    user.UpdateInfo();
+                    
                     break;
                 }
                 case 3:
                 {
-                    user.Delete_user_record();
+                    
                     break;
 
                 }
@@ -93,7 +88,7 @@ int main() {
             cin >> username;
             cout << "enter your password \n";
             cin >> password;
-            user.Login_Admin(username, password);
+           
             cout << "Enter your choice:\n 1-Display one user only \n 2-Display all users \n  3-Delete one user only \n  4-Delete all users \n 5-View users filtered by doses \n 6-View records ordered by their age \n 7-View the waiting list \n 8- View % of first dose people \n 9-View % of both dose people \n 10-View % of males and females in the sytsem" << endl;
             cin >> your_choice;
             switch (your_choice)
@@ -103,24 +98,24 @@ int main() {
 
                 cout << "Enter User's id" << endl;
                 cin >> id;
-                user.DisplayInfo(id);
+               
                 break;
             }
             case 2:
             {
-                user.DisplayAllUsers();
+                
                 break;
             }
             case 3:
             {
                 cout << "Enter User's id" << endl;
                 cin >> id;
-                user.Delete_user_record(id);
+                
                 break;
 
             }
             case 4: {
-                user.DeleteAllUsers();
+                
                 break;
             }
             case 5: {
