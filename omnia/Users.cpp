@@ -3,7 +3,7 @@
 #include<string>
 
 
-Users::Users(string user_name, string user_id, string user_pass, char user_gender, int user_age, string user_govern, string user_vaccinted, int user_num_of_dose)
+Users::Users(string user_name, string user_id, string user_pass, char user_gender, int user_age, string user_govern, int user_num_of_dose)
 {
 	this->fullName = user_name;
 	this->id = user_id;
@@ -11,7 +11,6 @@ Users::Users(string user_name, string user_id, string user_pass, char user_gende
 	this->gender = user_gender;
 	this->age = user_age;
 	this->governorate = user_govern;
-	this->vaccinated = user_vaccinted;
 	this->num_of_dose = user_num_of_dose;
 }
 

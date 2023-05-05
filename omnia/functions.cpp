@@ -16,7 +16,7 @@ Users user;
 
 
 
-void Register(string user_name, string user_id, string user_pass, char user_gender, int user_age, string user_govern, string user_vaccinted, int num_of_dose)
+void Register()
 {
 	cout << "\tMake sure the National ID you are using aren't already registered." << endl;
 	cout << "\tPlease fill in the following information to create your record:" << endl;
@@ -25,7 +25,7 @@ one:
 	cout << "\tFirst name: ";
 	cin >> user.fullName;
 	for (int i = 0; i < user.fullName.size(); i++) {
-		if (isalpha(user_name[i]) == 0) {
+		if (isalpha(user.fullName[i]) == 0) {
 			cout << "\tInvalid, name must contain letters only." << endl;
 			goto one;
 			break;
@@ -66,7 +66,8 @@ two:
 		file.close(); 
 		cout << "\tYour record is successfully saved." << endl;
 	}
-	Users temp(user_name, user_id, user_pass, user_gender, user_age, user_govern, user_vaccinted, num_of_dose);
+	//hasa el heta el ta7t dy msh lazem
+	Users temp(user.fullName, user.id, user.password, user.gender, user.age, user.governorate,user.num_of_dose);
 	users.push_back(temp);
 }
 void CheckRegisteredID(string enteredID) {
@@ -418,8 +419,5 @@ void edit_user_data() {
 
 }
 void Delete_MyACC() {
-
-}
-void vaccinationState_stat() {
 
 }
