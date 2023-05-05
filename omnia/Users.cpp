@@ -1,10 +1,9 @@
 #include "Users.h"
 #include<iostream>
-
 #include<string>
 
 
-Users::Users(string user_name, string user_id, string user_pass, string user_gender, int user_age, string user_govern, string user_vaccinted, string user_num_of_dose)
+Users::Users(string user_name, string user_id, string user_pass, char user_gender, int user_age, string user_govern, string user_vaccinted, int user_num_of_dose)
 {
 	this->fullName = user_name;
 	this->id = user_id;
@@ -17,7 +16,7 @@ Users::Users(string user_name, string user_id, string user_pass, string user_gen
 }
 
 Users::Users() {
-	fullName = id = password = gender = governorate = vaccinated = "";
+	fullName = id = password = governorate = vaccinated = "";
 	age = 0;
 
 }
