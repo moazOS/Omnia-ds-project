@@ -1,11 +1,69 @@
-#include<string>
 #include<iostream>
-#include"Users.h"
-#include"functions.h"
+#include<string>
+#include "Users.h"
+#include <vector>
+#include <fstream>
+#include <set>
 using namespace std;
+
+
+
+bool is_empty_file(std::ifstream& pFile)
+{
+    return pFile.peek() == std::ifstream::traits_type::eof();
+}
+
+//---------------------global-----------------
+vector<Users> users;
+set<int>USERSSID;
+set<int> usersID;
+
+int TOTALUSERS;
+//--------------------------------------------
+
+
+
+
+
+void Register(string user_name, int user_id, string user_pass, string user_gender, int user_age, string user_govern, string user_vaccinted, string num_of_dose);
+void Login(string, string);
+void Password_validation(string);
+void ID_validation(string);
+void DisplayMyRecord();
+void edit_user_data();
+void Delete_MyACC();
+void vaccinationState_stat();
+void load();
+void save();
+
+
+
+
+
+
+
+
 int main() {
+    load();
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+    save();
     
-    int choice;
+    /*cout << users[0].id << endl;*/
+    
+    cout <<TOTALUSERS << endl;
+    
+
+
+   /* int choice;
     int option;
     int your_choice;
     string x;
@@ -163,6 +221,136 @@ int main() {
     }
 
     }
-    return 0;
+    return 0;*/
 }
-//this is a test
+
+
+
+
+
+
+void Register(string user_name, int user_id, string user_pass, string user_gender, int user_age, string user_govern, string user_vaccinted, string num_of_dose)
+{
+    Users temp(user_name, user_id, user_pass, user_gender, user_age, user_govern, user_vaccinted, num_of_dose);
+    usersID.insert(user_id);
+    TOTALUSERS++;
+    users.push_back(temp);
+}
+void Login(string, string) {
+
+}
+void Password_validation(string) {
+
+}
+void ID_validation(string) {
+
+}
+void DisplayMyRecord() {
+
+}
+void edit_user_data() {
+
+}
+void Delete_MyACC() {
+
+}
+void vaccinationState_stat() {
+
+}
+void load()
+{
+
+
+
+    
+
+    string fullName;
+    string id;
+    string password;
+    string gender;;
+    string governorate;
+    string vaccinated;
+    string num_of_dose;
+    string age;
+
+
+    string line;
+
+
+    ifstream file("users\\USERSID.txt");
+    string ids;
+    if (file.fail()) {
+        std::ofstream fav;
+        fav.open("users\\USERSID.txt");
+        fav.close();
+    }
+    if (!is_empty_file(file))
+    {
+        while (!file.eof())
+        {
+
+            getline(file, ids);
+            usersID.insert(stoi(ids));
+            TOTALUSERS++;
+        }
+        file.close();
+    }
+
+
+
+
+
+
+
+    ifstream file2("users\\Users.txt");
+  
+    if (file2.fail()) {
+        std::ofstream fav;
+        fav.open("users\\Users.txt");
+        fav.close();
+    }
+    /*if (!is_empty_file(file2))
+    {
+        while (file2 >> fullName >> id >> password >> gender >> age >> governorate >> vaccinated >> num_of_dose)
+        {
+            Users temp(fullName, stoi(id), password, gender, stoi(age), governorate, vaccinated, num_of_dose);
+            users.push_back(temp);
+        }
+
+    }*/
+    if (!is_empty_file(file2))
+    {
+        while (!file2.eof())
+        {
+            getline(file2, line);
+
+        }
+    }
+    file2.close();
+ 
+    
+   
+    
+ 
+
+}
+void save()
+{
+    ofstream file;
+    ofstream file2;
+    file2.open("users\\USERSID.txt");
+    file.open("users\\Users.txt");
+
+        
+    if (file.is_open() && file2.is_open()) {
+         for (int i = 0; i < users.size(); i++) 
+         {
+            file << users[i].fullName << " " << users[i].id << " " << users[i].password << " " << users[i].gender << " " << users[i].age << " " << users[i].gender << " " << users[i].vaccinated << " " << users[i].num_of_dose << endl;
+            file2 << users[i].id << endl;
+
+         }
+    }
+    file.close();
+    file2.close();
+    
+}
