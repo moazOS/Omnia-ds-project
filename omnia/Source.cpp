@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <set>
+
 using namespace std;
 
 
@@ -15,10 +16,9 @@ bool is_empty_file(std::ifstream& pFile)
 
 //---------------------global-----------------
 vector<Users> users;
-set<int>USERSSID;
 set<int> usersID;
 
-int TOTALUSERS;
+float TOTALUSERS=0;
 //--------------------------------------------
 
 
@@ -36,7 +36,16 @@ void vaccinationState_stat();
 void load();
 void save();
 
+//--------------------- admin ------------------------------
 
+void display_perc_of_gender(char kind);
+void display_perc_of_doses(int dose_num);
+void display_record(int id);
+void display_records_filterd(string num_doses , int age);
+void delete_record(int id);
+
+
+//----------------------------------------------------------
 
 
 
@@ -44,25 +53,38 @@ void save();
 
 
 int main() {
-    load();
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
+ 
+    Register("moaz", 1, "27007447", "male", 19, "cairo", "yes", "1");
+    Register("maryam", 4, "142003", "girl", 20, "cairo", "yes", "3");
+    Register("omnia", 6, "27007576", "girl", 20, "cairo", "yes", "2");
+    Register("nada", 2, "27007511", "girl", 18, "cairo", "yes", "3");
+    Register("saleh", 5, "27007555", "male", 19, "sudan", "yes", "3");
+    Register("youssef", 9, "27007787", "male", 20, "cairo", "no", "0");
+    Register("malak", 8, "27007333", "girl", 19, "cairo", "no", "0");
+    Register("kiro", 7, "27007444", "male", 21, "cairo", "yes", "2");
+    Register("menna", 3, "27007123", "girl", 21, "cairo", "no", "0");
+    display_perc_of_gender('m');
+    display_perc_of_gender('f');
+    cout << "------------------------\n";
 
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    Register("moaz", 123, "27007447", "male", 20, "cairo", "yes", "5");
-    save();
-    
+     display_perc_of_doses(0);
+     display_perc_of_doses(1);
+     display_perc_of_doses(2);
+     cout << "------------------------\n";
+
+     display_record(4);
+     cout << "------------------------\n";
+     display_records_filterd("2",20);
+     cout << "------------------------\n";
+     delete_record(5);
+     display_record(5);
+
     /*cout << users[0].id << endl;*/
     
     cout <<TOTALUSERS << endl;
+
     
-
-
+    
    /* int choice;
     int option;
     int your_choice;
@@ -309,7 +331,7 @@ void load()
         fav.open("users\\Users.txt");
         fav.close();
     }
-    /*if (!is_empty_file(file2))
+    if (!is_empty_file(file2))
     {
         while (file2 >> fullName >> id >> password >> gender >> age >> governorate >> vaccinated >> num_of_dose)
         {
@@ -317,15 +339,8 @@ void load()
             users.push_back(temp);
         }
 
-    }*/
-    if (!is_empty_file(file2))
-    {
-        while (!file2.eof())
-        {
-            getline(file2, line);
-
-        }
     }
+
     file2.close();
  
     
@@ -336,21 +351,150 @@ void load()
 }
 void save()
 {
+
+
     ofstream file;
     ofstream file2;
     file2.open("users\\USERSID.txt");
     file.open("users\\Users.txt");
 
-        
+
     if (file.is_open() && file2.is_open()) {
-         for (int i = 0; i < users.size(); i++) 
-         {
-            file << users[i].fullName << " " << users[i].id << " " << users[i].password << " " << users[i].gender << " " << users[i].age << " " << users[i].gender << " " << users[i].vaccinated << " " << users[i].num_of_dose << endl;
+        for (int i = 0; i < users.size(); i++)
+        {
+            if (i == users.size() - 1)
+            {
+                file << users[i].fullName << " " << users[i].id << " " << users[i].password << " " << users[i].gender << " " << users[i].age << " " << users[i].governorate << " " << users[i].vaccinated << " " << users[i].num_of_dose;
+                file2 << users[i].id;
+                break;
+            }
+            file << users[i].fullName << " " << users[i].id << " " << users[i].password << " " << users[i].gender << " " << users[i].age << " " << users[i].governorate << " " << users[i].vaccinated << " " << users[i].num_of_dose << endl;
             file2 << users[i].id << endl;
 
-         }
+        }
     }
     file.close();
     file2.close();
+
+
     
 }
+
+
+//----------------------  admin -----------------------------
+
+void display_perc_of_gender(char kind)
+{
+    float num_of_boys = 0;
+    float num_of_girls = 0;
+    for (int i = 0; i < users.size(); i++)
+    {
+        if (users[i].gender == "male")
+        {
+             num_of_boys++;
+           
+        }
+        else
+        {
+            num_of_girls++;
+
+        }
+    }
+    if (kind == 'm' || kind == 'M') {
+        
+        cout << (num_of_boys / TOTALUSERS) * 100<< "%\n";
+    }
+    else if (kind == 'f' || kind == 'F') {
+        cout << (num_of_girls / TOTALUSERS) * 100 << "%\n";
+    }
+    else
+        cout << "Wrong Choice please choose eithe m or f\n";
+
+}
+void display_perc_of_doses(int dose_num)
+{
+    float num_of_doses=0;
+    float num_of_0 = 0;
+    float num_of_1 = 0;
+    float num_of_2 = 0;
+    for (int i = 0; i < users.size(); i++) {
+        if (users[i].num_of_dose == "0") {
+            num_of_0++;
+            num_of_doses++;
+        }
+        else if (users[i].num_of_dose == "1") {
+            num_of_1++;
+            num_of_doses++;
+
+        }
+        else if (users[i].num_of_dose == "2") {
+            num_of_2++;
+            num_of_doses++;
+
+        }
+    }
+    if (dose_num == 0) {
+        cout << (num_of_0 / num_of_doses) * 100 << "%\n";
+    }
+    else if (dose_num == 1) {
+        cout << (num_of_1 / num_of_doses) * 100 << "%\n";
+    }
+    else if (dose_num == 2) {
+        cout << (num_of_2 / num_of_doses) * 100 << "%\n";
+    }
+    else {
+        cout << "Wrong information\n";
+    }
+}
+void display_record(int id)
+{
+    bool flag = true;
+    for (int i = 0; i < users.size(); i++)
+    {
+        if (users[i].id == id) {
+            cout << "Name : " << users[i].fullName << "\nGender : " << users[i].gender << "\nAge : " << users[i].age << "\nGovernorate : " << users[i].governorate << "\nNum of doses : " << users[i].num_of_dose << endl;
+            flag = false;
+            break;
+        }
+    }
+    if (flag)
+    {
+        cout << "user not found"<<endl;
+    }
+
+}
+void display_records_filterd(string num_doses, int age)
+{
+    bool flag = true;
+    for (int i = 0; i < users.size(); i++)
+    {
+        if (users[i].age == age && users[i].num_of_dose==num_doses) {
+            cout << "Name : " << users[i].fullName << "\nGender : " << users[i].gender << "\nAge : " << users[i].age << "\nGovernorate : " << users[i].governorate << endl;
+            cout << "--------------------------------------------\n";
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        cout << "user not found" << endl;
+    }
+}
+void delete_record(int id)
+{
+    bool flag = true;
+    for (int i = 0; i < users.size(); i++)
+    {
+        if (users[i].id == id) {
+            users.erase(users.begin() + i);
+            TOTALUSERS--;
+            flag = false;
+            break;
+        }
+    }
+    if (flag)
+    {
+        cout << "user not found" << endl;
+    }
+}
+
+//-----------------------------------------------------------

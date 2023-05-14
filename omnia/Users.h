@@ -9,7 +9,7 @@ public:
 	string fullName;
 	int id;
 	string password;
-	string gender;;
+	string gender;
 	string governorate;
 	string vaccinated;
 	string num_of_dose;
