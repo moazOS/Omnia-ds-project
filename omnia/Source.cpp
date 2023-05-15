@@ -4,7 +4,9 @@
 #include <vector>
 #include <fstream>
 #include <set>
-
+#include<queue>
+#include <map>
+#include<unordered_map>
 using namespace std;
 
 
@@ -15,9 +17,11 @@ bool is_empty_file(std::ifstream& pFile)
 }
 
 //---------------------global-----------------
-vector<Users> users;
+int Myid;
+vector<Users> users_vec;
+unordered_map<int, Users>users;
 set<int> usersID;
-
+queue<Users>waiting_list;
 float TOTALUSERS=0;
 //--------------------------------------------
 
@@ -35,6 +39,8 @@ void Delete_MyACC();
 void vaccinationState_stat();
 void load();
 void save();
+void accepting_vaccinated(int number_of_user);
+void get_vaccinted_user();
 
 //--------------------- admin ------------------------------
 
@@ -256,7 +262,9 @@ void Register(string user_name, int user_id, string user_pass, string user_gende
     Users temp(user_name, user_id, user_pass, user_gender, user_age, user_govern, user_vaccinted, num_of_dose);
     usersID.insert(user_id);
     TOTALUSERS++;
-    users.push_back(temp);
+    users_vec.push_back(temp);
+    users.insert(make_pair(user_id, temp));
+    
 }
 void Login(string, string) {
 
@@ -270,13 +278,78 @@ void ID_validation(string) {
 void DisplayMyRecord() {
 
 }
-void edit_user_data() {
-
+void edit_user_data(string choose) {
+    if (choose=="name")
+    {
+        cin >> users.at(Myid).fullName;
+    }
+    else if (choose == "id")
+    {
+        cin >> users.at(Myid).id;
+    }
+    else if (choose == "gender")
+    {
+        cin >> users.at(Myid).gender;
+    }
+    else if (choose == "age")
+    {
+        cin >> users.at(Myid).age;
+    }
+    else if (choose == "govern")
+    {
+        cin >> users.at(Myid).gender;
+    }
+    else if (choose == "vaccinted")
+    {
+        cin >> users.at(Myid).vaccinated;
+    }
+    else if (choose == "num_of_dose")
+    {
+        cin >> users.at(Myid).num_of_dose;
+    }
 }
-void Delete_MyACC() {
-
+void Delete_MyACC() 
+{
+    users.erase(Myid);
 }
 void vaccinationState_stat() {
+
+}
+void accepting_vaccinated(int number_of_user)
+{
+    if (number_of_user > waiting_list.size())
+    {
+        cout << "can't accept all these users now ";
+    }
+    else
+    {
+        for (int x = 0; x < users.size(); x++)
+        {
+            if (waiting_list.size() == 0 || number_of_user == 0)
+            {
+                break;
+            }
+            Users temp1 = waiting_list.front();
+            if (temp1.id == users[x].id)
+            {
+                //cout << users[x].fullName << " done" << endl;
+                users[x].vaccinated = "yes";
+                waiting_list.pop();
+                number_of_user--;
+                continue;
+            }
+        }
+    }
+}
+void get_vaccinted_user()
+{
+    for (int x = 0; x < users.size(); x++)
+    {
+        if (users[x].vaccinated == "NO" || users[x].vaccinated == "No" || users[x].vaccinated == "nO" || users[x].vaccinated == "no")
+        {
+            waiting_list.push(users[x]);
+        }
+    }
 
 }
 void load()
@@ -336,7 +409,8 @@ void load()
         while (file2 >> fullName >> id >> password >> gender >> age >> governorate >> vaccinated >> num_of_dose)
         {
             Users temp(fullName, stoi(id), password, gender, stoi(age), governorate, vaccinated, num_of_dose);
-            users.push_back(temp);
+            users.insert(make_pair(stoi(id), temp));
+            users_vec.push_back(temp);
         }
 
     }
@@ -362,14 +436,14 @@ void save()
     if (file.is_open() && file2.is_open()) {
         for (int i = 0; i < users.size(); i++)
         {
-            if (i == users.size() - 1)
+            if (i == users_vec.size() - 1)
             {
-                file << users[i].fullName << " " << users[i].id << " " << users[i].password << " " << users[i].gender << " " << users[i].age << " " << users[i].governorate << " " << users[i].vaccinated << " " << users[i].num_of_dose;
-                file2 << users[i].id;
+                file << users_vec[i].fullName << " " << users_vec[i].id << " " << users_vec[i].password << " " << users_vec[i].gender << " " << users_vec[i].age << " " << users_vec[i].governorate << " " << users_vec[i].vaccinated << " " << users_vec[i].num_of_dose;
+                file2 << users_vec[i].id;
                 break;
             }
-            file << users[i].fullName << " " << users[i].id << " " << users[i].password << " " << users[i].gender << " " << users[i].age << " " << users[i].governorate << " " << users[i].vaccinated << " " << users[i].num_of_dose << endl;
-            file2 << users[i].id << endl;
+            file << users_vec[i].fullName << " " << users_vec[i].id << " " << users_vec[i].password << " " << users_vec[i].gender << " " << users_vec[i].age << " " << users_vec[i].governorate << " " << users_vec[i].vaccinated << " " << users_vec[i].num_of_dose << endl;
+            file2 << users_vec[i].id << endl;
 
         }
     }
@@ -387,9 +461,9 @@ void display_perc_of_gender(char kind)
 {
     float num_of_boys = 0;
     float num_of_girls = 0;
-    for (int i = 0; i < users.size(); i++)
+    for (int i = 0; i < users_vec.size(); i++)
     {
-        if (users[i].gender == "male")
+        if (users_vec[i].gender == "male")
         {
              num_of_boys++;
            
@@ -417,17 +491,17 @@ void display_perc_of_doses(int dose_num)
     float num_of_0 = 0;
     float num_of_1 = 0;
     float num_of_2 = 0;
-    for (int i = 0; i < users.size(); i++) {
-        if (users[i].num_of_dose == "0") {
+    for (int i = 0; i < users_vec.size(); i++) {
+        if (users_vec[i].num_of_dose == "0") {
             num_of_0++;
             num_of_doses++;
         }
-        else if (users[i].num_of_dose == "1") {
+        else if (users_vec[i].num_of_dose == "1") {
             num_of_1++;
             num_of_doses++;
 
         }
-        else if (users[i].num_of_dose == "2") {
+        else if (users_vec[i].num_of_dose == "2") {
             num_of_2++;
             num_of_doses++;
 
@@ -448,28 +522,27 @@ void display_perc_of_doses(int dose_num)
 }
 void display_record(int id)
 {
-    bool flag = true;
-    for (int i = 0; i < users.size(); i++)
-    {
-        if (users[i].id == id) {
-            cout << "Name : " << users[i].fullName << "\nGender : " << users[i].gender << "\nAge : " << users[i].age << "\nGovernorate : " << users[i].governorate << "\nNum of doses : " << users[i].num_of_dose << endl;
-            flag = false;
-            break;
+
+
+        if (users.find(id)!=users.end() ) {
+            cout << "Name : " << users.at(id).fullName << "\nGender : " << users.at(id).gender << "\nAge : " << users.at(id).age << "\nGovernorate : " << users.at(id).governorate << "\nNum of doses : " << users.at(id).num_of_dose << endl;
+
         }
-    }
-    if (flag)
-    {
-        cout << "user not found"<<endl;
-    }
+        else
+        {
+            cout << "user not found" << endl;
+        }
+
+
 
 }
 void display_records_filterd(string num_doses, int age)
 {
     bool flag = true;
-    for (int i = 0; i < users.size(); i++)
+    for (int i = 0; i < users_vec.size(); i++)
     {
-        if (users[i].age == age && users[i].num_of_dose==num_doses) {
-            cout << "Name : " << users[i].fullName << "\nGender : " << users[i].gender << "\nAge : " << users[i].age << "\nGovernorate : " << users[i].governorate << endl;
+        if (users_vec[i].age == age && users_vec[i].num_of_dose==num_doses) {
+            cout << "Name : " << users_vec[i].fullName << "\nGender : " << users_vec[i].gender << "\nAge : " << users_vec[i].age << "\nGovernorate : " << users_vec[i].governorate << endl;
             cout << "--------------------------------------------\n";
             flag = false;
         }
@@ -481,20 +554,7 @@ void display_records_filterd(string num_doses, int age)
 }
 void delete_record(int id)
 {
-    bool flag = true;
-    for (int i = 0; i < users.size(); i++)
-    {
-        if (users[i].id == id) {
-            users.erase(users.begin() + i);
-            TOTALUSERS--;
-            flag = false;
-            break;
-        }
-    }
-    if (flag)
-    {
-        cout << "user not found" << endl;
-    }
+    users.erase(id);
 }
 
 //-----------------------------------------------------------
