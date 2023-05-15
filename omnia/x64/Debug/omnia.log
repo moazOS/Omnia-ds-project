@@ -1,2 +1,4 @@
 ﻿  Source.cpp
+C:\Users\Moaaz Osama\Desktop\hwal3 feky ya omnia\Omnia-ds-project - Copy\omnia\Source.cpp(297,9): warning C4101: 'your_choice': unreferenced local variable
+C:\Users\Moaaz Osama\Desktop\hwal3 feky ya omnia\Omnia-ds-project - Copy\omnia\Source.cpp(296,9): warning C4101: 'option': unreferenced local variable
   omnia.vcxproj -> C:\Users\Moaaz Osama\Desktop\hwal3 feky ya omnia\Omnia-ds-project - Copy\omnia\x64\Debug\omnia.exe
