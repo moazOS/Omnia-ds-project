@@ -16,6 +16,7 @@ int Doses = 0, oneDose = 0, twoDose = 0;
 int cairoCount = 0, alexCount = 0, gizaCount = 0, hurghadaCount = 0, otherCount = 0;
 int female = 0, male = 0;
 float TOTALUSERS = 0;
+char c;
 //---------------------Menus-----------------------
 void Users::mainMenu()
 {
@@ -136,26 +137,22 @@ void Users::userMenu() {
 //----------------------  user -----------------------------
 void Users::Login() {
 
-c:
+a:
     cout << "\tenter your id: ";
     cin >> user.id;
 
 
-B:
+b:
     cout << "\tenter your password:";
-    cin >> user.password;
-    //checking the ID in the sign in page
+    cin >> user.password_confirm;
+
     itr = users.find(user.id);
     if (user.id == "admin") {
 
-        cout << "\n\n\n\t\t\t\t\t| Verfiying ADMIN |\n\t\t\t\t\t";
-        for (int a = 1; a < 8; a++)
-        {
+        cout << "\n\n\n\t\t\t\t\ Checking admin..... \n\t\t\t\t\t";
 
-            cout << "...";
-        }
-        if (user.password == "admin") {
-            cout << "\n\n\tAccess Granted..\n\n";
+        if (user.password_confirm == "admin") {
+            cout << "\n\n\tyou are logged in successfully as an admin press enter to continue..\n\n";
             system("PAUSE");
             system("cls");
             adminMenu();
@@ -173,7 +170,7 @@ B:
             switch (passchoice) {
             case 1:
                 system("cls");
-                goto B;
+                goto b;
                 break;
             case 2:
                 system("cls");
@@ -186,28 +183,26 @@ B:
             }
             system("PAUSE");
             system("cls");
-            goto B;
+            goto b;
         }
 
     }
     else if (itr == users.end()) {
-        cout << "\n\n\n\t\t\t\t\t| Verfiying USER |\n\t\t\t\t\t";
-
+        cout << "\n\n\n\t\t\t\t\tCHECKING USER..\n\t\t\t\t\t";
         cout << "\n\tInvalid ID...\n";
         cout << "\tMake Sure You Sign Up First!\n\n";
         system("PAUSE");
         system("cls");
         mainMenu();
-        goto c;
+        goto a;
     }
 
     else {
-        cout << "\n\n\n\t\t\t\t\t| Verfiying USER |\n\t\t\t\t\t";
+        cout << "\n\n\n\t\t\t\t\tCHECKING USER....\n\t\t\t\t\t";
 
-
-        if (user.password == itr->second.password) {
+        if (user.password_confirm == itr->second.password_confirm) {
             cout << endl;
-            cout << "\n\n\tAccess Granted..\n\n";
+            cout << "\n\n\tYou are logged in successfully as a user press enter to continue..\n\n";
             system("PAUSE");
             system("cls");
             userMenu();
@@ -226,7 +221,7 @@ B:
             switch (passchoice) {
             case 1:
                 system("cls");
-                goto B;
+                goto b;
                 break;
             case 2:
                 system("cls");
@@ -239,23 +234,23 @@ B:
             }
             system("PAUSE");
             system("cls");
-            goto B;
+            goto b;
         }
 
         cout << endl;
-        cout << "\n\n\tAccess Granted..\n\n";
+        cout << "\n\n\tYou are logged in successfully\n\n";
         system("PAUSE");
         system("cls");
         userMenu();
 
         cout << endl;
 
+    
 
 
-
+    
     }
 }
-char c;
 void Users::Register()
 {
 
@@ -324,7 +319,7 @@ part2:
     myfile.open(fn, ios::app);
     myfile << fullName << endl;
     myfile << id << endl;
-    myfile << password_confirm << endl;
+    myfile << password_confirm<< endl;
     myfile << age << endl;
     myfile << gender << endl;
     myfile << governorate << endl;
@@ -365,6 +360,12 @@ void Queue::dequeue(string id)
         back = NULL;
 
     delete (temp);
+}
+
+void Queue::display()
+{
+ 
+
 }
 void Users::VaccineCheck() {
     char ans;
@@ -913,58 +914,62 @@ void Users::adminMenu()
         cout << "               ***********************************************           " << endl;
         cout << "                            WELCOME TO Admin page                        " << endl;
         cout << "               ***********************************************           " << endl;
-        cout << "1 -> Display percentage of gender" << endl;
-        cout << "2 -> Display percentage of doses" << endl;
-        cout << "3 -> Display/Delete all records" << endl;
-        cout << "4 -> Display a record" << endl;
-        cout << "5 -> Delete a record" << endl;
-        cout << "6 -> Display records filterd" << endl;
-        cout << "7 -> Exit" << endl;
+        cout << "1 -> Display/Delete all records" << endl;
+        cout << "2 -> Display a record" << endl;
+        cout << "3 -> Delete a record" << endl;
+        cout << "4 -> Display records filtered by doses" << endl;
+        cout << "5  -> Display records ordered by age" << endl;
+        cout << "6 -> Display peopele that need to be vaccinated from the waiting list" << endl;
+        cout << "7 -> Display percentage of gender" << endl;
+        cout << "8-> Display percentage of records filtered by doses" << endl;
+        cout << "9 -> Exit" << endl;
         cout << "Choose a number : ";
         cin >> c;
         switch (c)
         {
         case 1:
         {
-            char c2;
-            cout << "M : Male      F : Femals" << endl;
-            cout << "Choose a char : ";
-            cin >> c2;
-            display_perc_of_gender(c2);
+            ViewDeleteAll();
             break;
         }
 
 
         case 2:
         {
-            int c2;
-            cout << "Number of doses : ";
-            cin >> c2;
-            display_perc_of_doses(c2);
+            display_record();
             break;
         }
         case 3: {
-            ViewDeleteAll();
+            delete_record();
             break;
         }
         case 4:
-        {
-            display_record();
+        { 
+            display_records_filterd();
             break;
         }
 
         case 5:
         {
-            delete_record();
+            display_ordered_by_age();
             break;
         }
         case 6:
         {
-            display_records_filterd();
+            display_waitinglist_records();
             break;
         }
-
-
+        case 7:
+        {
+            display_perc_of_gender();
+            break;
+        }
+        case 8:
+        {
+            display_perc_of_doses();
+            break;
+        }
+        
         default:
             done = false;
             break;
@@ -973,98 +978,22 @@ void Users::adminMenu()
     system("cls");
     mainMenu();
 }
-void Users:: display_perc_of_gender(char kind)
+void Users::display_perc_of_gender()
 {
-    float num_of_boys = 0;
-    float num_of_girls = 0;
-    if (users_vec.size() != 1)
-    {
-        for (int i = 0; i < users_vec.size(); i++)
-        {
-            if (users_vec[i].gender == "male")
-            {
-                num_of_boys++;
+    if (users.size() == 0) {
+        cout << "\t\t\t\t\tno users to display their statistics.....\n";
 
-            }
-            else
-            {
-                num_of_girls++;
-
-            }
-        }
     }
+    else {
 
-    bool done = true;
-    do
-    {
-        if (kind == 'm' || kind == 'M') {
+        float statfemale = (female / (float)users.size()) * 100;
+        cout << "\tPercentage of Females registered in the system: " << statfemale << "%" << endl;
 
-            cout << (num_of_boys / TOTALUSERS) * 100 << "%\n";
-            cout << "f" << endl;
-            done = false;
-            break;
-        }
-        else if (kind == 'f' || kind == 'F') {
-            cout << (num_of_girls / TOTALUSERS) * 100 << "%\n";
-            done = false;
-            break;
-        }
-        else
-            cout << "Wrong Choice please choose eithe m or f\n";
-        cout << "M : Male      F : Femals" << endl;
-        cout << "Choose a char : ";
-        cin >> kind;
-    } while (done);
-
-}
-void Users::display_perc_of_doses(int dose_num)
-{
-    float num_of_doses = 0;
-    float num_of_0 = 0;
-    float num_of_1 = 0;
-    float num_of_2 = 0;
-    for (int i = 0; i < users_vec.size(); i++) {
-        if (users_vec[i].num_of_dose ==0) {
-            num_of_0++;
-            num_of_doses++;
-        }
-        else if (users_vec[i].num_of_dose == 1) {
-            num_of_1++;
-            num_of_doses++;
-
-        }
-        else if (users_vec[i].num_of_dose == 2) {
-            num_of_2++;
-            num_of_doses++;
-
-        }
+        float statmale = (male / (float)users.size()) * 100;
+        cout << " \tPercentage of Males registered in the system: " << statmale << "%" << endl;
     }
-    bool done = true;
-    do
-    {
-        if (dose_num == 0) {
-            cout << (num_of_0 / num_of_doses) * 100 << "%\n";
-            done = false;
-            break;
-        }
-        else if (dose_num == 1) {
-            cout << (num_of_1 / num_of_doses) * 100 << "%\n";
-            done = false;
-            break;
-
-        }
-        else if (dose_num == 2) {
-            cout << (num_of_2 / num_of_doses) * 100 << "%\n";
-            done = false;
-            break;
-        }
-        else {
-            cout << "Wrong information\n";
-            cout << "Number of doses : ";
-            cin >> dose_num;
-        }
-    } while (done);
-
+    returnBack();
+    adminMenu();
 }
 void Users::display_record()
 {
@@ -1104,7 +1033,7 @@ void Users::display_record()
 
 
 }
-void Users::display_records_filterd()
+void Users::display_perc_of_doses()
 {
         if (users.size() == 0) 
         {
@@ -1126,7 +1055,6 @@ void Users::display_records_filterd()
         returnBack();
         adminMenu();
 }
-
 void Users::delete_record()
 {
     cout << "\tPlease enter the National ID of the User whose data you would like deleted:";
@@ -1255,6 +1183,93 @@ void Users::ViewDeleteAll() {
 
     }
 }
+void Users::display_records_filterd(){
+   if (users.size() == 0)
+    {
+        cout << "\tno record available\n";
+        returnBack();
+        adminMenu();
+
+    }
+   else {
+
+       if (user.num_of_dose == 0) {
+           cout << "\tno record!\n";
+           returnBack();
+           adminMenu();
+
+       }
+       else {
+
+           cout << "\t-----------------Recorded Data Filtered by only doses-----------------\n\n";
+           cout << "\fullName:" << "  " << user.fullName << endl;
+           cout << "\tDoses taken:" << "  " << user.num_of_dose << endl;
+           returnBack();
+           adminMenu();
+       }
+   }
+}
+void Users::display_ordered_by_age() {
+    if (users.size() == 0) {
+        cout << "\tno record!\n";
+        returnBack();
+        adminMenu();
+
+    }
+    else if (user.num_of_dose== 0 && user.vaccinated==false) {
+        cout << "\tno record is still vaccinated\n";
+        returnBack();
+        adminMenu();
+
+    }
+    else {
+        if (user.num_of_dose == 1) {
+            for (itr = users.begin(); itr != users.end(); ++itr) {
+                cout << "\t-----------------Vaccinated users ordered by The age-----------------\n\n";
+                cout << "\fullName:" << "  " << itr->second.fullName << endl;
+                cout << "\tNational ID:" << "  " << itr->first << endl;
+                cout << "\tPassword:" << "  " << itr->second.password << endl;
+                cout << "\tAge:" << "  " << itr->second.age << endl;
+                cout << "\tGender:" << "  " << itr->second.gender << endl;
+                cout << "\tgovernorate:" << "  " << itr->second.governorate << endl;
+                cout << "\tDoses taken:" << "  " << itr->second.num_of_dose << endl;
+            }
+        }
+        if (user.num_of_dose == 2) {
+            for (itr = users.begin(); itr != users.end(); ++itr) {
+                cout << "\fullName:" << "  " << itr->second.fullName << endl;
+                cout << "\tNational ID:" << "  " << itr->first << endl;
+                cout << "\tPassword:" << "  " << itr->second.password << endl;
+                cout << "\tAge:" << "  " << itr->second.age << endl;
+                cout << "\tGender:" << "  " << itr->second.gender << endl;
+                cout << "\tgovernorate:" << "  " << itr->second.governorate << endl;
+                cout << "\tDoses taken:" << "  " << itr->second.num_of_dose << endl;
+
+            }
+        }
+       
+        returnBack();
+        adminMenu();
+    }
+}
+void Users::display_waitinglist_records() {
+    if (users.size() == 0) {
+        cout << "\tno waiting list!\n";
+        returnBack();
+        adminMenu();
+
+    }
+    else {
+        firstDoseWaitingList.display();
+        secondDoseWaitingList.display();
+
+    }
+
+    returnBack();
+    adminMenu();
+
+}
+
 
 //----------------------  files -----------------------------
 Users Users::getData(string file) {
@@ -1341,7 +1356,7 @@ void Users::save() {
             myfile.open(filename, ios::app);
             myfile << itr->second.fullName << endl;
             myfile << itr->second.id << endl;
-            myfile << itr->second.password << endl;
+            myfile << itr->second.password_confirm << endl;
             myfile << itr->second.age << endl;
             myfile << itr->second.gender << endl;
             myfile << itr->second.governorate << endl;

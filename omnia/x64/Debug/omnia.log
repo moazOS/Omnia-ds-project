@@ -1,1 +1,7 @@
-﻿  omnia.vcxproj -> C:\Users\AGHA SMART STORE\Desktop\vaccine 3\Omnia-ds-project\omnia\x64\Debug\omnia.exe
+﻿  Users.cpp
+C:\Users\AGHA SMART STORE\Desktop\vaccine 3\Omnia-ds-project\omnia\Users.cpp(152,17): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\AGHA SMART STORE\Desktop\vaccine 3\Omnia-ds-project\omnia\Users.cpp(273,1): warning C4102: 'part2': unreferenced label
+C:\Users\AGHA SMART STORE\Desktop\vaccine 3\Omnia-ds-project\omnia\Users.cpp(519,13): warning C4129: 'F': unrecognized character escape sequence
+C:\Users\AGHA SMART STORE\Desktop\vaccine 3\Omnia-ds-project\omnia\Users.cpp(564,17): warning C4129: 'F': unrecognized character escape sequence
+C:\Users\AGHA SMART STORE\Desktop\vaccine 3\Omnia-ds-project\omnia\Users.cpp(1138,21): warning C4129: 'F': unrecognized character escape sequence
+  omnia.vcxproj -> C:\Users\AGHA SMART STORE\Desktop\vaccine 3\Omnia-ds-project\omnia\x64\Debug\omnia.exe

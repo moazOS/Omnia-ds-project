@@ -47,11 +47,13 @@ class Users
 	void deleteUserData();
 	//--------------------- admin ------------------------------
 
-	void display_perc_of_gender(char kind);
-	void display_perc_of_doses(int dose_num);
+	void display_perc_of_gender();
+	void display_perc_of_doses();
 	void display_record();
 	void display_records_filterd();
 	void delete_record();
+	void display_ordered_by_age();
+	void display_waitinglist_records();
 	void ViewDeleteAll();
 	//--------------------- file retated functions ------------------------------
 	Users getData(string id);
@@ -82,5 +84,6 @@ public:
 	}
 	void enqueue(string);
 	void dequeue(string);
+	void display();
 };
 
