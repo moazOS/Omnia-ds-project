@@ -34,23 +34,25 @@ class Users
 	void createPass();
 	void displayGovernorate();
 	void GovernorateChoice();
-	void gotVaccine();
+	void VaccineCheck();
 	void insertUserData();
 	void Login();
 	bool Password_ID_validation(string id, string password);
 
 	void displayUserData();
+	void diplayEditChoices();
 	void editUserData();
+	bool checknumber(string value);
 	void editAgain(char);
 	void deleteUserData();
 	//--------------------- admin ------------------------------
 
 	void display_perc_of_gender(char kind);
 	void display_perc_of_doses(int dose_num);
-	void display_record(string id);
-	void display_records_filterd(int num_doses, int age);
-	void delete_record(string id);
-
+	void display_record();
+	void display_records_filterd();
+	void delete_record();
+	void ViewDeleteAll();
 	//--------------------- file retated functions ------------------------------
 	Users getData(string id);
 	void load();
