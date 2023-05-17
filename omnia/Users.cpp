@@ -12,7 +12,9 @@ set<string> usersID;
 Queue firstDoseWaitingList;
 Queue secondDoseWaitingList;
 Users user;
-int Doses = 0,oneDose = 0, twoDose = 0, cairoCount = 0, alexCount = 0, gizaCount = 0, hurghadaCount = 0, otherCount = 0, female = 0, male = 0;
+int Doses = 0, oneDose = 0, twoDose = 0;
+int cairoCount = 0, alexCount = 0, gizaCount = 0, hurghadaCount = 0, otherCount = 0;
+int female = 0, male = 0;
 float TOTALUSERS = 0;
 //---------------------Menus-----------------------
 void Users::mainMenu()
